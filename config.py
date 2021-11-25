@@ -62,41 +62,24 @@ myTerm = "alacritty"  # My terminal of choice
 keys = [
 
     # SUPER + FUNCTION KEYS
-    # Fullscreen
     Key([super], "f", lazy.window.toggle_fullscreen()),
-    # Close Window
     Key([super], "q", lazy.window.kill()),
-    # Xterm
     Key([super], "t", lazy.spawn(myTerm)),
     # Volume Control
     # Key([mod], "v", lazy.spawn('pavucontrol')),
     Key([super], "d", lazy.spawn('nwggrid -p -o 0.4')),
-    # DMenu
     Key([super], "a",
         lazy.spawn(
             "dmenu_run -i -nb '#2B303B' -nf '#C0C5CE' -sb '#C0C5CE' -sf '#2B303B' -fn 'NotoMonoRegular:bold:pixelsize=14'"
         )),
-    # Force Close?
-    Key([super], "Escape", lazy.spawn('xkill')),
-    # Alacritty
     Key([super], "Return", lazy.spawn('alacritty')),
     Key([super], "KP_Enter", lazy.spawn('alacritty')),
-    # Brave
     Key([super], "w", lazy.spawn('brave')),
-    # File Manager
     Key([super], "e", lazy.spawn('pcmanfm')),
-    # VS Code
     Key([super], "c", lazy.spawn('code')),
-    # Sublime Text
     Key([super], "s", lazy.spawn('subl')),
-    # Shutdown
-    Key([super], "x", lazy.shutdown()),
 
     # SUPER + SHIFT KEYS
-
-    # Key([mod, "shift"], "Return", lazy.spawn('pcmanfm')),
-    # Key([mod, "shift"], "d", lazy.spawn("dmenu_run -i -nb '#2B303B' -nf '#C0C5CE' -sb '#C0C5CE' -sf '#2B303B' -fn 'NotoMonoRegular:bold:pixelsize=14'")),
-    #    Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
     Key([super, "shift"], "q", lazy.window.kill()),
     Key([super, "shift"], "r", lazy.restart()),
     Key([super, "control"], "r", lazy.restart()),
@@ -105,15 +88,11 @@ keys = [
     # CONTROL + ALT KEYS
     Key(["mod1", "control"], "o",
         lazy.spawn(home + '/.config/qtile/scripts/picom-toggle.sh')),
-    # Key(["mod1", "control"], "t", lazy.spawn('xterm')),
     # Key(["mod1", "control"], "u", lazy.spawn('pavucontrol')),
 
     # ALT + ... KEYS
 
     # Key(["mod1"], "p", lazy.spawn('pamac-manager')),
-    # Key(["mod1"], "f", lazy.spawn('firedragon')),
-    # Key(["mod1"], "m", lazy.spawn('pcmanfm')),
-    # Key(["mod1"], "w", lazy.spawn('garuda-welcome')),
 
     # CONTROL + SHIFT KEYS
     Key([mod2, "shift"], "Escape", lazy.spawn('lxtask')),
@@ -122,7 +101,6 @@ keys = [
     Key([], "Print", lazy.spawn('flameshot full -p ' + home + '/Pictures')),
     Key([mod2], "Print",
         lazy.spawn('flameshot full -p ' + home + '/Pictures')),
-    #    Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
 
     # MULTIMEDIA KEYS
 
@@ -138,11 +116,10 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
-
-    #    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle")),
-    #    Key([], "XF86AudioNext", lazy.spawn("mpc next")),
-    #    Key([], "XF86AudioPrev", lazy.spawn("mpc prev")),
-    #    Key([], "XF86AudioStop", lazy.spawn("mpc stop")),
+    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle")),
+    Key([], "XF86AudioNext", lazy.spawn("mpc next")),
+    Key([], "XF86AudioPrev", lazy.spawn("mpc prev")),
+    Key([], "XF86AudioStop", lazy.spawn("mpc stop")),
 
     # QTILE LAYOUT KEYS
     Key([super], "n", lazy.layout.normalize()),
@@ -271,9 +248,6 @@ group_names = [
     "0",
 ]
 
-# FOR AZERTY KEYBOARDS
-#group_names = ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave",]
-
 group_labels = [
     "1 ",
     "2 ",
@@ -323,10 +297,10 @@ for i in groups:
         Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
 
         # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-        #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+        Key([super, "shift"], i.name, lazy.window.togroup(i.name)),
         # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
-        Key([super, "shift"], i.name, lazy.window.togroup(i.name),
-            lazy.group[i.name].toscreen()),
+        # Key([super, "shift"], i.name, lazy.window.togroup(i.name),
+        # lazy.group[i.name].toscreen()),
     ])
 
 
