@@ -47,8 +47,22 @@ web_browser = 'brave'
 code_editor = 'code'
 text_editor = 'subl'
 music_player = ''
-file_manager = 'pcmanfm'
+# file_manager = 'pcmanfm'
+file_manager = 'nnn'
 terminal = 'alacritty'
+
+ocean_colors = {
+    "BG": "#2B303B",
+    "FG": "#C0C5CE",
+    "red": "#BF616A",
+    "green": "#A3BE8C",
+    "yellow": "#EBCB8B",
+    "blue": "#8FA1B3",
+    "magenta": "#B48EAD",
+    "cyan": "#8FA1B3",
+    "white": "#EFF1F5",
+    "grey": "#65737E"
+}
 
 
 @lazy.function
@@ -83,7 +97,8 @@ keys = [
     Key([super], "Return", lazy.spawn(terminal)),
     Key([super], "KP_Enter", lazy.spawn(terminal)),
     Key([super], "w", lazy.spawn(web_browser)),
-    Key([super], "e", lazy.spawn(file_manager)),
+    # Key([super], "e", lazy.spawn(file_manager)),
+    Key([super], "e", lazy.spawn(f'{terminal} -e {file_manager}')),
     Key([super], "c", lazy.spawn(code_editor)),
     Key([super], "s", lazy.spawn(text_editor)),
 
@@ -315,8 +330,8 @@ def init_layout_theme():
     return {
         "margin": 0,
         "border_width": 2,
-        "border_focus": "#C0C5CE",
-        "border_normal": "#2B303B"
+        "border_focus": ocean_colors["FG"],
+        "border_normal": ocean_colors["BG"]
     }
 
 
@@ -325,12 +340,12 @@ layout_theme = init_layout_theme()
 layouts = [
     layout.MonadTall(margin=0,
                      border_width=2,
-                     border_focus="#8FA1B3",
-                     border_normal="#2B303B"),
+                     border_focus=ocean_colors["FG"],
+                     border_normal=ocean_colors['BG']),
     layout.MonadWide(margin=0,
                      border_width=2,
-                     border_focus="#8FA1B3",
-                     border_normal="#2B303B"),
+                     border_focus=ocean_colors["FG"],
+                     border_normal=ocean_colors["BG"]),
     layout.Matrix(**layout_theme),
     layout.Bsp(**layout_theme),
     layout.Floating(**layout_theme),
@@ -353,18 +368,6 @@ layouts = [
 # COLORS FOR THE BAR
 
 test_color = ["#fc9803", "#fc5a03"]
-ocean_colors = {
-    "BG": "#2B303B",
-    "FG": "#C0C5CE",
-    "red": "#BF616A",
-    "green": "#A3BE8C",
-    "yellow": "#EBCB8B",
-    "blue": "#8FA1B3",
-    "magenta": "#B48EAD",
-    "cyan": "#8FA1B3",
-    "white": "#EFF1F5",
-    "grey": "#65737E"
-}
 
 
 def init_colors():
@@ -408,7 +411,7 @@ def base(fg='text', bg='dark'):
 
 
 def init_widgets_defaults():
-    return dict(font="Noto Sans",
+    return dict(font="PragmataPro Mono",
                 fontsize=14,
                 padding=2,
                 background=ocean_colors["BG"])
@@ -436,7 +439,7 @@ def init_widgets_list():
                    foreground=ocean_colors["BG"],
                    background=ocean_colors["BG"]),
         widget.GroupBox(**base(),
-                        font='UbuntuMono Nerd Font',
+                        font='PragmataPro Mono',
                         fontsize=14,
                         margin_y=3,
                         margin_x=0,
@@ -459,24 +462,25 @@ def init_widgets_list():
                    padding=10,
                    foreground=ocean_colors["BG"],
                    background=ocean_colors["BG"]),
-        widget.TaskList(
-            highlight_method='block',  # or block
-            icon_size=17,
-            max_title_width=250,
-            rounded=False,
-            padding_x=10,
-            padding_y=0,
-            margin_y=0,
-            fontsize=14,
-            border=ocean_colors["grey"],
-            foreground=ocean_colors["FG"],
-            margin=0,
-            txt_floating='🗗',
-            txt_minimized='>_ ',
-            borderwidth=1,
-            # background=colors[20],
-            #unfocused_border = 'border'
-        ),
+        # widget.TaskList(
+        #     highlight_method='block',  # or block
+        #     icon_size=17,
+        #     max_title_width=250,
+        #     rounded=False,
+        #     padding_x=10,
+        #     padding_y=0,
+        #     margin_y=0,
+        #     fontsize=14,
+        #     border=ocean_colors["grey"],
+        #     foreground=ocean_colors["FG"],
+        #     margin=0,
+        #     txt_floating='🗗',
+        #     txt_minimized='>_ ',
+        #     borderwidth=1,
+        #     # background=colors[20],
+        #     #unfocused_border = 'border'
+        # ),
+        widget.WindowName(foreground=ocean_colors["FG"]),
         widget.CurrentLayoutIcon(
             custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
             foreground=ocean_colors["FG"],
@@ -490,7 +494,7 @@ def init_widgets_list():
             #   background = ocean_colors["BG"]
         ),
         widget.Net(
-            font="Noto Sans",
+            font="PragmataPro Mono",
             fontsize=14,
             # Here enter your network name
             interface=["wlp6s0"],
@@ -504,7 +508,7 @@ def init_widgets_list():
                    foreground=ocean_colors["grey"],
                    background=ocean_colors["BG"]),
         widget.CPU(
-            font="Noto Sans",
+            font="PragmataPro Mono",
             #format = '{MemUsed}M/{MemTotal}M',
             update_interval=1,
             fontsize=14,
@@ -519,7 +523,7 @@ def init_widgets_list():
                    foreground=ocean_colors["grey"],
                    background=ocean_colors["BG"]),
         widget.Memory(
-            font="Noto Sans",
+            font="PragmataPro Mono",
             format='{MemUsed: .0f}M/{MemTotal: .0f}M',
             update_interval=1,
             fontsize=14,
