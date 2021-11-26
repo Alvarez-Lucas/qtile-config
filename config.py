@@ -42,6 +42,14 @@ alt = "alt"  # mod1
 mod2 = "control"  # mod2
 home = os.path.expanduser('~')
 
+# Default Applications
+web_browser = 'brave'
+code_editor = 'code'
+text_editor = 'subl'
+music_player = ''
+file_manager = 'pcmanfm'
+terminal = 'alacritty'
+
 
 @lazy.function
 def window_to_prev_group(qtile):
@@ -72,18 +80,17 @@ keys = [
         lazy.spawn(
             "dmenu_run -i -nb '#2B303B' -nf '#C0C5CE' -sb '#C0C5CE' -sf '#2B303B' -fn 'NotoMonoRegular:bold:pixelsize=14'"
         )),
-    Key([super], "Return", lazy.spawn('alacritty')),
-    Key([super], "KP_Enter", lazy.spawn('alacritty')),
-    Key([super], "w", lazy.spawn('brave')),
-    Key([super], "e", lazy.spawn('pcmanfm')),
-    Key([super], "c", lazy.spawn('code')),
-    Key([super], "s", lazy.spawn('subl')),
+    Key([super], "Return", lazy.spawn(terminal)),
+    Key([super], "KP_Enter", lazy.spawn(terminal)),
+    Key([super], "w", lazy.spawn(web_browser)),
+    Key([super], "e", lazy.spawn(file_manager)),
+    Key([super], "c", lazy.spawn(code_editor)),
+    Key([super], "s", lazy.spawn(text_editor)),
 
     # SUPER + SHIFT KEYS
     Key([super, "shift"], "q", lazy.window.kill()),
     Key([super, "shift"], "r", lazy.restart()),
-    Key([super, "control"], "r", lazy.restart()),
-    Key([super, "shift"], "x", lazy.shutdown()),
+    # Key([super, "control"], "r", lazy.restart()),
 
     # CONTROL + ALT KEYS
     Key(["mod1", "control"], "o",
@@ -91,8 +98,8 @@ keys = [
     # Key(["mod1", "control"], "u", lazy.spawn('pavucontrol')),
 
     # ALT + ... KEYS
-
-    # Key(["mod1"], "p", lazy.spawn('pamac-manager')),
+    Key(["mod1"], "p", lazy.spawn('rofi -show window')),
+    Key(["mod1"], "l", lazy.spawn('rofi -show run')),
 
     # CONTROL + SHIFT KEYS
     Key([mod2, "shift"], "Escape", lazy.spawn('lxtask')),
