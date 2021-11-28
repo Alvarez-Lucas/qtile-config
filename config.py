@@ -48,7 +48,7 @@ code_editor = 'code'
 text_editor = 'subl'
 music_player = ''
 # file_manager = 'pcmanfm'
-file_manager = 'nnn'
+file_manager = 'nnn -H'
 terminal = 'alacritty'
 
 ocean_colors = {
@@ -115,6 +115,7 @@ keys = [
     # ALT + ... KEYS
     Key(["mod1"], "p", lazy.spawn('rofi -show window')),
     Key(["mod1"], "l", lazy.spawn('rofi -show run')),
+    Key(["mod1"], "Return", lazy.spawn(terminal)),
 
     # CONTROL + SHIFT KEYS
     Key([mod2, "shift"], "Escape", lazy.spawn('lxtask')),
@@ -673,7 +674,7 @@ def set_floating(window):
 floating_types = ["notification", "toolbar", "splash", "dialog"]
 
 follow_mouse_focus = True
-bring_front_click = False
+bring_front_click = True
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
@@ -709,3 +710,9 @@ auto_fullscreen = True
 focus_on_window_activation = "focus"  # or smart
 
 wmname = "LG3D"
+
+# Experimental
+commands = ["nitrogen --restore &"]
+
+for command in commands:
+    os.system(command)
