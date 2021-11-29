@@ -46,7 +46,7 @@ home = os.path.expanduser('~')
 web_browser = 'brave'
 code_editor = 'code'
 text_editor = 'subl'
-music_player = ''
+music_player = 'youtube-music'
 # file_manager = 'pcmanfm'
 file_manager = 'nnn -H'
 terminal = 'alacritty'
@@ -116,6 +116,10 @@ keys = [
     Key(["mod1"], "p", lazy.spawn('rofi -show window')),
     Key(["mod1"], "l", lazy.spawn('rofi -show run')),
     Key(["mod1"], "Return", lazy.spawn(terminal)),
+    Key(["mod1"], "z", lazy.spawn(music_player)),
+    # Key(["mod1"], "x", lazy.spawn(terminal)),
+    # Key(["mod1"], "c", lazy.spawn(terminal)),
+    # Key(["mod1"], "v", lazy.spawn(terminal)),
 
     # CONTROL + SHIFT KEYS
     Key([mod2, "shift"], "Escape", lazy.spawn('lxtask')),
